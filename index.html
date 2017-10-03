@@ -1,11 +1,162 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sample JS Project frontend</title>
+    <title>Weather Shopping App</title>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
   </head>
   <body>
+    <h1>Weather Shopping App</h1>
+      <div class="container">
+        <div class="form">
+          <form action='/' class="ui-form">
+            <div class="field">
+              <label>Search by zip code</label>
+              <input type="test" placeholder="Enter your zip code"/>
+            </div>
+            <input type="submit" class="submit-button" value="Search Weather"/>
+          </form>
+        </div>
+        <div class="weather">
+          <div>
+            <p id="weather-list"></p>
+          </div>
+
+        </div>
+        <div class="weather-show"></div>
+      </div>
+
+<!-- weather show  -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-5">
+            <div class="weather">
+                <div class="current">
+                    <div class="info">
+                        <div>&nbsp;</div>
+                        <div class="city"><small><small></small></small></div>
+                        <div class="high-temp"><small></small></div>
+                        <div class="low-temp"><small></small></div>
+                        <div id="today-description"><small><small></small></small></div>
+                        <div>&nbsp;</div>
+                    </div>
+                    <div class="icon">
+                        <span class="wi-day-sunny"></span>
+                    </div>
+                </div>
+                <div class="future">
+                    <div class="day">
+                        <h3>Day 1</h3>
+                        <p><span class="wi-day-cloudy"></span></p>
+                        <p id="day-1-high"><p>
+                        <p id="day-1-low"><p>
+                        <p id="day-1-des"><p>
+                    </div>
+                    <div class="day">
+                        <h3>Day 2</h3>
+                        <p><span class="wi-showers"></span></p>
+                        <p id="day-2-high"><p>
+                        <p id="day-2-low"><p>
+                        <p id="day-2-des"><p>
+                    </div>
+                    <div class="day">
+                        <h3>Day 3</h3>
+                        <p><span class="wi-rain"></span></p>
+                        <p id="day-3-high"><p>
+                        <p id="day-3-low"><p>
+                        <p id="day-3-des"><p>
+                    </div>
+                    <div class="day">
+                        <h3>Day 4</h3>
+                        <p><span class="wi-rain"></span></p>
+                        <p id="day-4-high"><p>
+                        <p id="day-4-low"><p>
+                        <p id="day-4-des"><p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="/Content/css/weather-icons/css/weather-icons.min.css" />
+<style>
+    .weather
+    {
+        display: flex;
+        flex-flow: column wrap;
+        box-shadow: 0px 1px 10px 0px #cfcfcf;
+        overflow: hidden;
+    }
+        .weather .current
+        {
+            display: flex;
+            flex-flow: row wrap;
+            background-image: url("/Content/images/shared/misc/london-view.png");
+            background-repeat: repeat-x;
+            color: blue;
+            padding: 20px;
+            text-shadow: 1px 1px gray;
+        }
+            .weather .current .info
+            {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: space-around;
+                flex-grow: 2;
+            }
+                .weather .current .info .city
+                {
+                    font-size: 26px;
+                }
+                .weather .current .info .temp
+                {
+                    font-size: 56px;
+                }
+                .weather .current .info .wind
+                {
+                    font-size: 24px;
+                }
+            .weather .current .icon
+            {
+                text-align: center;
+                font-size: 64px;
+                flex-grow: 1;
+            }
+        .weather .future
+        {
+            display: flex;
+            flex-flow: row nowrap;
+        }
+            .weather .future .day
+            {
+                flex-grow: 1;
+                text-align: center;
+                cursor: pointer;
+            }
+                .weather .future .day:hover
+                {
+                    color: #fff;
+                    background-color: #82CAFA;
+                }
+                .weather .future .day h3
+                {
+                    text-transform: uppercase;
+                }
+                .weather .future .day p
+                {
+                    font-size: 28px;
+                }
+</style>
+
+<!-- weather end -->
+
+  <div id="show">
+    <h2>What to Wear...</h2>
+
+  </div>
+
+
     <div class="container">
       <div id="new-note-container">
         <form id="new-note-form">
@@ -15,6 +166,7 @@
       </div>
       <div id="notes-container">
 
+
       </div>
     </div>
 
@@ -22,6 +174,9 @@
     <script type="text/javascript" src="src/adapters/notesAdapter.js"></script>
     <script type="text/javascript" src="src/components/notes.js"></script>
     <script type="text/javascript" src="src/components/app.js"></script>
+    <script type="text/javascript" src="src/adapters/weatherAdapter.js"></script>
+    <script type="text/javascript" src="src/adapters/itemAdapter.js"></script>
+    <script type="text/javascript" src="src/components/item.js"></script>
     <script type="text/javascript" src="src/index.js"></script>
   </body>
 </html>
