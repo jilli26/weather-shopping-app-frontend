@@ -1,24 +1,33 @@
+
+
 class itemAdapter {
-  constructor(zipCode) {
-    this.zipCode = zipCode
-    this.baseUrl = `api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&APPID=0a216dd04aa19249c4ab195fd5925bab`
+  constructor(data) {
+    this.name  = data.name
+    this.brand = data.brand
+    this.category = data.category
+    this.temp_start = data.temp_start
+    this.temp_end = data.temp_end
+    this.url = data.url
+    this.image = data.image
+    this.baseUrl = `http://localhost:3000/api/v1/items/`
+    // ${this.id}` //???
   }
 
-  getItem() {
-    return fetch(this.baseUrl).then(res => res.json())
-  }
-
-  createItem(body) {
-    const itemCreateParams = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify({body})
-    }
-    return fetch(this.baseUrl, itemCreateParams).then(res => res.json())
-  }
+  // getItem() {
+  //   return fetch(this.baseUrl).then(res => res.json())
+  // }
+  //
+  // createItem(body) {
+  //   const itemCreateParams = {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type':'application/json'
+  //     },
+  //     body: JSON.stringify({body})
+  //   }
+  //   return fetch(this.baseUrl, itemCreateParams).then(res => res.json())
+  // }
 
 }
 

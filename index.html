@@ -3,29 +3,58 @@
   <head>
     <title>Weather Shopping App</title>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway" rel="stylesheet">
+    <style>
+      h1 {
+        font-family: 'Pacifico', cursive;
+        font-size: 60px;
+      }
+      body {
+        font-family: 'Raleway', sans-serif;
+      }
+      #clothes {
+        font-family: 'Raleway', sans-serif;
+        font-size: 20px;
+      }
+
+    </style>
   </head>
   <body>
-    <h1>Weather Shopping App</h1>
+
+    <h1 style="text-align:center">Weather Shopping App</h1><br>
+    <div class="clouds" style="text-align:center"><i class="fa fa-cloud"></i><i class="fa fa-cloud"></i><i class="fa fa-cloud"></i>
+
       <div class="container">
         <div class="form">
           <form action='/' class="ui-form">
             <div class="field">
-              <label>Search by zip code</label>
-              <input type="test" placeholder="Enter your zip code"/>
+              <label style="font-size: 30px"> </label>
+              <input type="test" style="font-size: 30px" placeholder="Enter your zip code"/>
             </div>
             <input type="submit" class="submit-button" value="Search Weather"/>
           </form>
         </div>
+
+
         <div class="weather">
           <div>
-            <p id="weather-list"></p>
+            <h2><b>What should I wear?</b</h2></br>
+              <div id="clothes">
+                <img id="place-image"/>
+                <p id="show-clothing"></p>
+                <p id="weather-list"></p>
+              </div>
           </div>
 
         </div>
-        <div class="weather-show"></div>
       </div>
+      <div class="weather-show"></div>
+      <div id="show">
 
+
+      </div>
 <!-- weather show  -->
 
 <div class="container">
@@ -107,14 +136,22 @@
             }
                 .weather .current .info .city
                 {
+                    text-align: left;
                     font-size: 26px;
                 }
-                .weather .current .info .temp
+                .weather .current .info .high-temp
                 {
-                    font-size: 56px;
+                    text-align: left;
+                    font-size: 24px;
                 }
-                .weather .current .info .wind
+                .weather .current .info .low-temp
                 {
+                    text-align: left;
+                    font-size: 24px;
+                }
+                .weather .current .info #today-description
+                {
+                    text-align: left;
                     font-size: 24px;
                 }
             .weather .current .icon
@@ -151,11 +188,6 @@
 
 <!-- weather end -->
 
-  <div id="show">
-    <h2>What to Wear...</h2>
-
-  </div>
-
 
     <div class="container">
       <div id="new-note-container">
@@ -164,12 +196,15 @@
           <input type="submit" value="Save note">
         </form>
       </div>
+
       <div id="notes-container">
 
 
       </div>
+
     </div>
 
+    <script src="custom.css"></script>
     <script type="text/javascript" src="src/components/note.js"></script>
     <script type="text/javascript" src="src/adapters/notesAdapter.js"></script>
     <script type="text/javascript" src="src/components/notes.js"></script>

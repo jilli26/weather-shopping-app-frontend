@@ -1,10 +1,11 @@
 class Item {
-  constructor() {
-    this.name = name
-    this.brand = brand
-    this.type = type
-    this.url = url
-    this.image = image
+  constructor(data) {
+    this.name = data.name
+    this.brand = data.brand
+    this.category = data.category
+    this.url = data.url
+    this.image = data.image
+    Item.all.push(this)
   }
 
   fetchItem() {
@@ -20,12 +21,12 @@ class Item {
     `<ul>
       <li>Name: ${this.name}</li>
       <li>Brand: ${this.brand}</li>
-      <li>Type: ${this.type}</li>
-      <li>URL: ${this.url}</li>
-      <li>Image: ${this.image}</li>
+      <li>Type: ${this.category}</li>
     </ul>`
   }
 
 
 
 }
+
+Item.all = []

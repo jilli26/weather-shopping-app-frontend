@@ -21,15 +21,18 @@ function searchCities(ev) {
 
   list.innerText = ""
   show.innerText = ""
+  let clothingArea = document.querySelector('#show-clothing')
+  clothingArea.innerText = ""
+  document.getElementById('place-image').src = ""
+
   // Article.all = []
 
   adapter = new weatherAdapter(term)
-  adapter.getItem().then(res => appendWeather(res))
+  adapter.getWeather().then(res => appendWeather(res))
 }
 
 
 function appendWeather(data) {
-  // debugger;
   highestTemps(data)
   lowestTemps(data)
   getDescriptions(data)
@@ -110,10 +113,46 @@ function appendWeather(data) {
     })
   }
 
-
   function showItems(day){
     show.innerHTML = ''
     article = Article.findArticle(headline)
     html = article.render()
     show.append(html)
   }
+
+
+
+    let clickable = document.querySelectorAll(".day")
+      clickable.forEach(function(button){
+        button.addEventListener('click', function getItem() {
+           fetch(`http://localhost:3000/api/v1/items/2`)
+           .then(res => res.json())
+           .then(json => adapter = new itemAdapter(json))
+           .then(json => createItem(json))
+         })
+
+         function createItem(json){
+           let newItem = new Item(json)
+           appendItem(newItem)
+         }
+
+         function itemRender(newItem){
+           var image = newItem.image
+           document.getElementById('place-image').src = image
+          //  debugger;
+           return `
+           <p>
+            <b>${newItem.brand}</b></br>
+              ${newItem.name}</br>
+              ${newItem.category}</br>
+              <a href="${newItem.url}">Find me online</a></br>
+          </p>
+                `
+         }
+
+         function appendItem(newItem){
+           let clothingArea = document.querySelector('#show-clothing')
+           clothingArea.innerHTML = itemRender(newItem)
+         }
+
+    })
