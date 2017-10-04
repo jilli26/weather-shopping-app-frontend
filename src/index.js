@@ -113,28 +113,28 @@ function appendWeather(data) {
     })
   }
 
-  function showItems(day){
-    show.innerHTML = ''
-    article = Article.findArticle(headline)
-    html = article.render()
-    show.append(html)
-  }
-
 
 
     let clickable = document.querySelectorAll(".day")
       clickable.forEach(function(button){
-        button.addEventListener('click', function getItem() {
+        button.addEventListener('click', function getItem(e) {
            fetch(`http://localhost:3000/api/v1/items/2`)
-           .then(res => res.json())
+           .then(res => res.json(e))
+           .then(res => getHighGetLow(e))
            .then(json => adapter = new itemAdapter(json))
            .then(json => createItem(json))
          })
+
+         function getHighGetLow(e) {
+           parentDiv = e.target.parentElement
+           debugger;
+         }
 
          function createItem(json){
            let newItem = new Item(json)
            appendItem(newItem)
          }
+
 
          function itemRender(newItem){
            var image = newItem.image

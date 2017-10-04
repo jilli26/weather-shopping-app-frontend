@@ -13,16 +13,33 @@
       }
       body {
         font-family: 'Raleway', sans-serif;
+
       }
       #clothes {
         font-family: 'Raleway', sans-serif;
         font-size: 20px;
       }
+      /*.my-container {
+        position: relative;
+        background: #5C97FF;
+        overflow: hidden;
+      }
+      .my-container::after {
+        content: "";
+        background: url('https://i.imgur.com/ZRFL3ae.jpg?1');
+        opacity: 0.5;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+      }*/
 
     </style>
   </head>
   <body>
-
+    <div class=".my-container"></div>
     <h1 style="text-align:center">Weather Shopping App</h1><br>
     <div class="clouds" style="text-align:center"><i class="fa fa-cloud"></i><i class="fa fa-cloud"></i><i class="fa fa-cloud"></i>
 
@@ -42,8 +59,16 @@
           <div>
             <h2><b>What should I wear?</b</h2></br>
               <div id="clothes">
+                <!-- first item -->
                 <img id="place-image"/>
                 <p id="show-clothing"></p>
+                <!-- second item  -->
+                <img id="place-image-2"/>
+                <p id="show-clothing-2"></p>
+                <!-- third item -->
+                <img id="place-image-3"/>
+                <p id="show-clothing-3"></p>
+
                 <p id="weather-list"></p>
               </div>
           </div>
@@ -76,6 +101,7 @@
                 </div>
                 <div class="future">
                     <div class="day">
+                        <p></p>
                         <h3>Day 1</h3>
                         <p><span class="wi-day-cloudy"></span></p>
                         <p id="day-1-high"><p>
