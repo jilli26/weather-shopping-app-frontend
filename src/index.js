@@ -17,16 +17,13 @@ function searchCities(ev) {
 
   let divs = document.querySelectorAll('.day');
   divs.forEach(day => {
-    document.getElementById('place-image').src = '';
     let low = parseInt(day.querySelectorAll('p')[3].innerText = "");
     let high = parseInt(day.querySelectorAll('p')[1].innerText ="");
     });
 
 	list.innerText = '';
-	let clothingArea = document.querySelector('#show-clothing');
-	clothingArea.innerText = '';
-	document.getElementById('place-image').src = '';
-
+	let clothingArea = document.getElementById('clothes');
+	clothingArea.innerHTML = '';
 	adapter = new weatherAdapter(term);
 	adapter.getWeather().then(res => appendWeather(res))
 	.then(json => getHighGetLow(json))
@@ -47,7 +44,8 @@ function getHighGetLow(json) {
 	divs.forEach(day => {
 		day.addEventListener('click', function(ev) {
 			ev.preventDefault();
-			document.getElementById('place-image').src = '';
+      let clothingArea = document.getElementById('clothes');
+    	clothingArea.innerHTML = '';
 			let low = parseInt(day.querySelectorAll('p')[3].innerText);
 			let high = parseInt(day.querySelectorAll('p')[1].innerText);
 			pickOutfit(low, high);
@@ -69,19 +67,7 @@ function pickOutfit(low, high) {
 		.then(json => createItem(json));
 }
 
-// day3 .querySelectorAll("p")[3] LOW TEMP
-//  day3 .querySelectorAll("p")[1] HIGH TEMP
-
-//  clickable.forEach(function(button){
-//    button.addEventListener('click', function getItem() {
-//       fetch(`http://localhost:3000/api/v1/items/2`)
-//       .then(res => res.json())
-//       .then(json => adapter = new itemAdapter(json))
-//      //  .then(json => createItem(json))
-//     })
-
 function appendWeather(data) {
-	// document.querySelector('.city').innerHTML = data.city.name;
 	document.querySelector('.high-temp').innerText = Math.round(
 		data.Days[1].temp_max_f
 	);
@@ -132,6 +118,7 @@ function createItem(json) {
 	let arrOfItems = [];
 	json.forEach(function(item) {
 		let newItem = new Item(item);
+    
 		arrOfItems.push(newItem);
 	});
 	appendItem(arrOfItems);
@@ -139,8 +126,6 @@ function createItem(json) {
 
 
 function appendItem(arrOfItems) {
-	//  let clothingArea = document.querySelector('#show-clothing')
-
 	arrOfItems.forEach(function(item) {
 		var newClothingArea = document.createElement('p');
 		document.querySelector('#clothes').appendChild(newClothingArea);
