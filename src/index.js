@@ -25,11 +25,61 @@ function searchCities(ev) {
   clothingArea.innerText = ""
   document.getElementById('place-image').src = ""
 
-  // Article.all = []
 
   adapter = new weatherAdapter(term)
   adapter.getWeather().then(res => appendWeather(res))
+  .then(json => getHighGetLow(json))
 }
+
+
+function getHighGetLow(json) {
+  let divs = document.querySelectorAll(".day")
+  currentDay = document.querySelector(".current")
+  currentDay.addEventListener('click', function(ev){
+    ev.preventDefault()
+    document.getElementById('place-image').src = " "
+    let low = parseInt((currentDay.querySelector('.low-temp').innerText))
+    let high = parseInt((currentDay.querySelector('.high-temp').innerText))
+      tempRange(low, high)
+  })
+  divs.forEach((day) => {
+    day.addEventListener('click', function(ev){
+      ev.preventDefault()
+      document.getElementById('place-image').src = " "
+      let low = parseInt((day.querySelectorAll("p")[3].innerText))
+      let high = parseInt((day.querySelectorAll("p")[1].innerText))
+      pickOutfit(low, high)
+    })
+  })
+}
+
+
+  function pickOutfit(low, high){
+    fetch('http://localhost:3000/api/v1/pickOutfit',
+    {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({highTemp: high, lowTemp: low})
+    })
+    .then(res => res.json())
+    .then(json => createItem(json))
+  }
+
+
+
+     // day3 .querySelectorAll("p")[3] LOW TEMP
+    //  day3 .querySelectorAll("p")[1] HIGH TEMP
+
+     //  clickable.forEach(function(button){
+     //    button.addEventListener('click', function getItem() {
+     //       fetch(`http://localhost:3000/api/v1/items/2`)
+     //       .then(res => res.json())
+     //       .then(json => adapter = new itemAdapter(json))
+     //      //  .then(json => createItem(json))
+     //     })
 
 
 function appendWeather(data) {
@@ -59,12 +109,6 @@ function appendWeather(data) {
   document.getElementById("day-4-des").innerText = descriptions[4]
   }
 
-  function appendArticle(headline){
-    show.html('')
-    article = Article.findArticle(headline)
-    html = article.render()
-    show.append(html)
-  }
 
   function highestTemps(data) {
     //temp is highest at 12 pm; push in array all the 12pm temps
@@ -114,45 +158,45 @@ function appendWeather(data) {
   }
 
 
-
-    let clickable = document.querySelectorAll(".day")
-      clickable.forEach(function(button){
-        button.addEventListener('click', function getItem(e) {
-           fetch(`http://localhost:3000/api/v1/items/2`)
-           .then(res => res.json(e))
-           .then(res => getHighGetLow(e))
-           .then(json => adapter = new itemAdapter(json))
-           .then(json => createItem(json))
-         })
-
-         function getHighGetLow(e) {
-           parentDiv = e.target.parentElement
-           debugger;
-         }
-
          function createItem(json){
-           let newItem = new Item(json)
-           appendItem(newItem)
+           let arrOfItems = []
+           json.forEach(function(item){
+             let newItem = new Item(item)
+             arrOfItems.push(newItem)
+           })
+           appendItem(arrOfItems)
          }
 
 
-         function itemRender(newItem){
-           var image = newItem.image
-           document.getElementById('place-image').src = image
-          //  debugger;
-           return `
-           <p>
-            <b>${newItem.brand}</b></br>
-              ${newItem.name}</br>
-              ${newItem.category}</br>
-              <a href="${newItem.url}">Find me online</a></br>
-          </p>
-                `
-         }
+        //  function itemRender(item){
+        //    var image = item.image
+         //
+        //    document.getElementById('place-image').src = image
+        //    return `
+        //    <p>
+        //     <b>${item.brand}</b></br>
+        //       ${item.name}</br>
+        //       ${item.category}</br>
+        //       <a href="${item.url}">Find me online</a></br>
+        //   </p>
+        //         `
+        //  }
 
-         function appendItem(newItem){
-           let clothingArea = document.querySelector('#show-clothing')
-           clothingArea.innerHTML = itemRender(newItem)
-         }
+         function appendItem(arrOfItems){
+          //  let clothingArea = document.querySelector('#show-clothing')
 
-    })
+           arrOfItems.forEach(function(item){
+             var newClothingArea = document.createElement('p')
+             document.querySelector('#clothes').appendChild(newClothingArea)
+             var newImageSpot = document.createElement('img')
+             let xx = document.querySelector('#clothes').appendChild(newImageSpot)
+             xx.src = item.image
+             newClothingArea.innerHTML =     `
+                  <p>
+                   <b>${item.brand}</b></br>
+                     ${item.name}</br>
+                     ${item.category}</br>
+                     <a href="${item.url}">Find me online</a></br>
+                 </p>`
+           })
+         }

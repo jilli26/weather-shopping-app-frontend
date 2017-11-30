@@ -13,6 +13,7 @@ class itemAdapter {
     // ${this.id}` //???
   }
 
+
   // getItem() {
   //   return fetch(this.baseUrl).then(res => res.json())
   // }
